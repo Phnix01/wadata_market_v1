@@ -27,10 +27,13 @@ class MyApp extends StatelessWidget {
           },
         )
       ],
-      child: MaterialApp(
-        theme: Styles.themeData(isDark: true, BuildContext: context),
-        home: HomeScreen(),
-      ),
+      child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
+        return MaterialApp(
+          theme: Styles.themeData(
+              isDark: themeProvider.getIsDarkTheme, BuildContext: context),
+          home: HomeScreen(),
+        );
+      }),
     );
   }
 }
