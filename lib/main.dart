@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_shop_v1/consts/styles.dart';
 import 'package:smart_shop_v1/providers/theme_provider.dart';
+import 'package:smart_shop_v1/root_screen.dart';
 import 'package:smart_shop_v1/screens/home_screen.dart';
 
 void main() {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           theme: Styles.themeData(
               isDark: themeProvider.getIsDarkTheme, BuildContext: context),
-          home: HomeScreen(),
+          home: const RootScreen(),
         );
       }),
     );
