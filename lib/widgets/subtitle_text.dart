@@ -4,7 +4,7 @@ class SubtitleTextWidget extends StatelessWidget {
   const SubtitleTextWidget({
     super.key,
     required this.label,
-    required this.fontSize,
+    this.fontSize = 16,
     this.fontStyle = FontStyle.normal,
     this.fontWeight = FontWeight.normal,
     this.color,
@@ -12,7 +12,7 @@ class SubtitleTextWidget extends StatelessWidget {
   });
 
   final String label;
-  final double fontSize;
+  final double? fontSize;
   final FontStyle fontStyle;
   final FontWeight? fontWeight;
   final Color? color;
@@ -25,7 +25,7 @@ class SubtitleTextWidget extends StatelessWidget {
       style: TextStyle(
         fontSize: this.fontSize,
         fontWeight: this.fontWeight,
-        color: this.color!,
+        color: this.color,
         decoration: this.textDecoration,
       ),
     );
