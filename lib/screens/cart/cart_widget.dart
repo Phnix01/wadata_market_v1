@@ -74,6 +74,12 @@ class CartWidget extends StatelessWidget {
                         OutlinedButton.icon(
                           onPressed: () async {
                             await showModalBottomSheet(
+                                backgroundColor:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        topRight: Radius.circular(30))),
                                 context: context,
                                 builder: (context) {
                                   return QuantityBottomSheet();
