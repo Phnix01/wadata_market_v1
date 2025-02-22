@@ -70,11 +70,15 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ),
                   Flexible(
                     child: Material(
+                      borderRadius: BorderRadius.circular(12.0),
                       color: Colors.lightBlue,
                       child: InkWell(
                         child: Padding(
                           padding: EdgeInsets.all(6.0),
-                          child: Icon(Icons.add_shopping_cart_outlined),
+                          child: Icon(
+                            Icons.add_shopping_cart_outlined,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),

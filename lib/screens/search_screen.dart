@@ -84,7 +84,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 itemCount: 200,
                 crossAxisCount: 2,
               ),
-            )
+            ),
           ],
         ),
       ),
