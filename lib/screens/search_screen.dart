@@ -1,3 +1,4 @@
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
 
@@ -40,6 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           children: [
             TextField(
+              controller: _searcherTextController,
               decoration: InputDecoration(
                 filled: true,
                 enabledBorder: OutlineInputBorder(
@@ -58,6 +60,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 suffixIcon: IconButton(
                   onPressed: () {
                     setState(() {
+                      FocusScope.of(context).unfocus();
                       _searcherTextController.clear();
                     });
                   },
@@ -68,6 +71,28 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 contentPadding: const EdgeInsets.all(20),
               ),
+            ),
+            Expanded(
+              child: DynamicHeightGridView(
+                  builder: (context, index) {
+                    return Center(
+                      child: Container(
+                        color:
+                            Colors.primaries[index % Colors.primaries.length],
+                        child: Center(
+                          child: Text(
+                            "Item $index",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  itemCount: 200,
+                  crossAxisCount: 2),
             )
           ],
         ),
