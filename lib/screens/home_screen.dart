@@ -1,9 +1,11 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_shop_v1/consts/app_constants.dart';
 import 'package:smart_shop_v1/providers/theme_provider.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
+import 'package:smart_shop_v1/widgets/products/category_rounded_widget.dart';
 import 'package:smart_shop_v1/widgets/products/lastest_arrival.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
@@ -31,51 +33,73 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         title: AppNameTextWidget(),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            height: size.height * 0.25,
-            child: Swiper(
-              itemBuilder: (BuildContext context, int index) {
-                return Image.asset(
-                  bannerImage[index],
-                  fit: BoxFit.fill,
-                );
-              },
-              itemCount: bannerImage.length,
-              pagination: SwiperPagination(
-                builder: DotSwiperPaginationBuilder(
-                  activeColor: Colors.red,
-                  color: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: size.height * 0.25,
+                child: Swiper(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Image.asset(
+                      bannerImage[index],
+                      fit: BoxFit.fill,
+                    );
+                  },
+                  itemCount: bannerImage.length,
+                  pagination: SwiperPagination(
+                    builder: DotSwiperPaginationBuilder(
+                      activeColor: Colors.red,
+                      color: Colors.white,
+                    ),
+                  ),
+                  // control: SwiperControl(),
                 ),
               ),
-              // control: SwiperControl(),
-            ),
+              const SizedBox(
+                height: 20,
+              ),
+              TitleTextWidget(
+                label: "Nouveau Arrivage",
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: size.height * 0.2,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return LastestArrival();
+                  },
+                  itemCount: 20,
+                ),
+              ),
+              const TitleTextWidget(label: "Categories"),
+              const SizedBox(
+                height: 15.0,
+              ),
+              GridView.count(
+                crossAxisCount: 4,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: List.generate(
+                  AppConstants.categoriesList.length,
+                  (index) {
+                    return CategoryRoundedWidget(
+                        image: AppConstants.categoriesList[index].image,
+                        name: AppConstants.categoriesList[index].name);
+                  },
+                ),
+              )
+            ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          TitleTextWidget(
-            label: "Nouveau Arrivage",
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            height: size.height * 0.2,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return LastestArrival();
-              },
-              itemCount: 20,
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
