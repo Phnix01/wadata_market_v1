@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_shop_v1/screens/inner_screen.dart/product_detail.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 import 'package:iconly/iconly.dart';
@@ -22,7 +23,7 @@ class _ProductWidgetState extends State<ProductWidget> {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          log(" clicked");
+          Navigator.pushNamed(context, ProductDetails.routName);
         },
         child: Column(
           children: [
