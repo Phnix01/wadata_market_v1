@@ -30,7 +30,7 @@ class _ProductWidgetState extends State<ProductWidget> {
               borderRadius: BorderRadius.circular(12.0),
               child: FancyShimmerImage(
                 imageUrl: "https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png",
-                height: size.height * 0.22,
+                height: size.height * 0.15,
                 width: double.infinity,
               ),
             ),

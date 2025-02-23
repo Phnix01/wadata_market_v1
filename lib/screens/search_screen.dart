@@ -1,7 +1,7 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
-import 'package:smart_shop_v1/widgets/product_widget.dart';
+import 'package:smart_shop_v1/widgets/products/product_widget.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
