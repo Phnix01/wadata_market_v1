@@ -5,6 +5,7 @@ import 'package:smart_shop_v1/consts/styles.dart';
 import 'package:smart_shop_v1/providers/theme_provider.dart';
 import 'package:smart_shop_v1/root_screen.dart';
 import 'package:smart_shop_v1/screens/home_screen.dart';
+import 'package:smart_shop_v1/screens/inner_screen.dart/product_detail.dart';
 
 void main() {
   //Do this in main.dart
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
           theme: Styles.themeData(
               isDark: themeProvider.getIsDarkTheme, BuildContext: context),
           home: const RootScreen(),
+          routes: {
+            ProductDetails.routName: (context) => ProductDetails(),
+          },
         );
       }),
     );
