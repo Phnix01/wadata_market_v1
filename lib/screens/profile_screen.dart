@@ -145,8 +145,55 @@ class ProfileScreen extends StatelessWidget {
                         backgroundColor: Colors.red,
                         foregroundColor: Colors.white),
                     icon: Icon(Icons.login),
-                    onPressed: () {},
-                    label: Text("Se Connecter"),
+                    onPressed: () async {
+                      await showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          icon: Icon(
+                            Icons.error_outline_outlined,
+                            size: 69,
+                            color: Colors.red,
+                          ),
+                          content: SizedBox(
+                            height: 100,
+                            child: Column(
+                              children: [
+                                TitleTextWidget(
+                                  label: "Se Deconnecter",
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SubtitleTextWidget(
+                                  label:
+                                      "Voulez-vous vraiment vous déconnecter?",
+                                )
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "Annuler",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text("Oui"),
+                            )
+                          ],
+                          backgroundColor:
+                              Theme.of(context).scaffoldBackgroundColor,
+                        ),
+                      );
+                    },
+                    label: Text("Se Deconnecter"),
                   ),
                 )
               ],
