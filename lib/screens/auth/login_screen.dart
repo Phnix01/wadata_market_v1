@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
@@ -54,7 +55,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 16,
               ),
               Form(
-                child: Column(),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _emailController,
+                      focusNode: _emailFocus,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(IconlyLight.message),
+                        hintText: "Votre addresse mail",
+                      ),
+                      onFieldSubmitted: (value) {
+                        FocusScope.of(context).requestFocus(_passwordFocusNode);
+                      },
+                    )
+                  ],
+                ),
               )
             ],
           )),
