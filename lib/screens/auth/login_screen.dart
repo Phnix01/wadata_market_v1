@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(30.0),
           child: SingleChildScrollView(
               child: Column(
             children: [
@@ -64,6 +64,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                width: 29, color: Colors.transparent)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide:
+                                BorderSide(width: 0, color: Colors.orange)),
+                        filled: true,
+                        fillColor: Colors.black.withOpacity(0.1),
+                        contentPadding: EdgeInsets.symmetric(vertical: 30),
                         prefixIcon: Icon(IconlyLight.message),
                         hintText: "Votre addresse mail",
                       ),
@@ -72,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                     const SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
                     TextFormField(
                       controller: _passwordController,
@@ -80,6 +91,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       textInputAction: TextInputAction.done,
                       obscureText: _isObscur ? true : false,
                       decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                width: 29, color: Colors.transparent)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide:
+                                BorderSide(width: 0, color: Colors.orange)),
+                        filled: true,
+                        fillColor: Colors.black.withOpacity(0.1),
+                        contentPadding: EdgeInsets.symmetric(vertical: 30),
                         hintText: "Mot de Passe",
                         prefixIcon: Icon(IconlyLight.lock),
                         suffixIcon: IconButton(
@@ -93,6 +115,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               : Icon(Icons.visibility_off),
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "mot de passe oublié".toUpperCase(),
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                            ),
+                          )),
                     )
                   ],
                 ),
