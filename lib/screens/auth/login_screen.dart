@@ -11,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isObscur = true;
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
 
@@ -69,6 +70,29 @@ class _LoginScreenState extends State<LoginScreen> {
                       onFieldSubmitted: (value) {
                         FocusScope.of(context).requestFocus(_passwordFocusNode);
                       },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    TextFormField(
+                      controller: _passwordController,
+                      focusNode: _passwordFocusNode,
+                      textInputAction: TextInputAction.done,
+                      obscureText: _isObscur ? true : false,
+                      decoration: InputDecoration(
+                        hintText: "Mot de Passe",
+                        prefixIcon: Icon(IconlyLight.lock),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _isObscur = !_isObscur;
+                            });
+                          },
+                          icon: _isObscur
+                              ? Icon(Icons.visibility)
+                              : Icon(Icons.visibility_off),
+                        ),
+                      ),
                     )
                   ],
                 ),
