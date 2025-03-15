@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:smart_shop_v1/consts/validator.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
@@ -99,6 +100,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       onFieldSubmitted: (value) {
                         FocusScope.of(context).requestFocus(_passwordFocusNode);
                       },
+                      validator: (value) {
+                        return MyValidators.emailValidator(value);
+                      },
                     ),
                     const SizedBox(
                       height: 20,
@@ -133,6 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               : Icon(Icons.visibility_off),
                         ),
                       ),
+                      validator: (value) {
+                        return MyValidators.passwordValidator(value);
+                      },
                     ),
                     const SizedBox(
                       height: 20,
