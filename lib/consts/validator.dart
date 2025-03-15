@@ -19,4 +19,14 @@ class MyValidators {
     }
     return null;
   }
+
+  static String? passwordValidator(String? value) {
+    if (value!.isEmpty) {
+      return " Veuillez entrer un mot de passe";
+    }
+    if (value.length < 4) {
+      return " Le mot de passe doit contenir au moins 4 caractères";
+    }
+    return null;
+  }
 }
