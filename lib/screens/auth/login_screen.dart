@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
+import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -145,6 +147,52 @@ class _LoginScreenState extends State<LoginScreen> {
                         icon: Icon(Icons.login),
                       ),
                     ),
+                    const SizedBox(height: 18),
+                    SubtitleTextWidget(label: "Ou Se Connecter avec..."),
+                    const SizedBox(height: 18),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          child: ElevatedButton.icon(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.all(12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              elevation: 5,
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.black,
+                            ),
+                            label: Text("Google"),
+                            icon: FaIcon(
+                              FontAwesomeIcons.google,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 150,
+                          child: ElevatedButton.icon(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.all(12),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                elevation: 5,
+                                foregroundColor: Colors.black87),
+                            label: Text("Facebook"),
+                            icon: FaIcon(
+                              FontAwesomeIcons.facebook,
+                              color: Colors.blueAccent,
+                            ),
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
               )
