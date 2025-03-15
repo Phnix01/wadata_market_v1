@@ -32,6 +32,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
+  void dispose() {
+    if (mounted) {
+      _emailController.dispose();
+      _passwordController.dispose();
+      _emailFocus.dispose();
+      _passwordFocusNode.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
