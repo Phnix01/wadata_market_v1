@@ -8,4 +8,15 @@ class MyValidators {
     }
     return null;
   }
+
+  static String? emailValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Veuillez entrer votre adresse email";
+    }
+    if (!RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
+        .hasMatch(value)) {
+      return " Veuillez entrer une adresse email valid";
+    }
+    return null;
+  }
 }
