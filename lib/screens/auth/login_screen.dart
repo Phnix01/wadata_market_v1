@@ -129,7 +129,22 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: TextDecoration.underline,
                             ),
                           )),
-                    )
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blueAccent,
+                            foregroundColor: Colors.white,
+                            padding: EdgeInsets.all(12),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0))),
+                        label: Text("Se Connecter"),
+                        icon: Icon(Icons.login),
+                      ),
+                    ),
                   ],
                 ),
               )
