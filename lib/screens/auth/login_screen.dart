@@ -192,6 +192,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         )
                       ],
+                    ),
+                    const SizedBox(
+                      height: 45.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SubtitleTextWidget(label: "Je suis nouveau ici /"),
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Créer un compte",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue),
+                            ))
+                      ],
                     )
                   ],
                 ),
