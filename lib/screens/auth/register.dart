@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:smart_shop_v1/consts/validator.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
+import 'package:smart_shop_v1/widgets/auth/image_picker_widget.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
@@ -26,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late final FocusNode _repeatPasswordFocus;
 
   final _formKey = GlobalKey<FormState>();
-
+  XFile? _pickedImage;
   @override
   void initState() {
     super.initState();
@@ -51,13 +53,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
-  Future<void> _loginFct() async {
+  Future<void> _registerFCT() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -84,6 +87,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         label:
                             " La création d'un compte permettra d'acheter et bénéficier des promos")
                   ],
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              SizedBox(
+                height: size.width * 0.3,
+                width: size.width * 0.3,
+                child: ImagePickerWidget(
+                  pickedImage: _pickedImage,
+                  function: () {},
                 ),
               ),
               const SizedBox(
@@ -237,7 +251,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
-                        onPressed: _loginFct,
+                        onPressed: _registerFCT,
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blueAccent,
                             foregroundColor: Colors.white,
