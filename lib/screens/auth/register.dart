@@ -15,16 +15,15 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool _isObscur = true;
-  late final TextEditingController,
-      _nameController,
-      _emailController,
-      _passwordController,
-      _repeatePasswordController;
+  late final TextEditingController _nameController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+  late final TextEditingController _repeatePasswordController;
 
-  late final FocusNode _nameFocus,
-      _emailFocus,
-      _passwordFocusNode,
-      _repeatPasswordFocus;
+  late final FocusNode _nameFocus;
+  late final FocusNode _emailFocus;
+  late final FocusNode _passwordFocusNode;
+  late final FocusNode _repeatPasswordFocus;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -104,6 +103,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fillColor: Colors.black.withOpacity(0.1),
                         contentPadding: EdgeInsets.symmetric(vertical: 30),
                         prefixIcon: Icon(IconlyLight.message),
+                        hintText: "Nom complet",
+                      ),
+                      onFieldSubmitted: (value) {
+                        FocusScope.of(context).requestFocus(_passwordFocusNode);
+                      },
+                      validator: (value) {
+                        return MyValidators.emailValidator(value);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: _emailController,
+                      focusNode: _emailFocus,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                width: 29, color: Colors.transparent)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide:
+                                BorderSide(width: 0, color: Colors.orange)),
+                        filled: true,
+                        fillColor: Colors.black.withOpacity(0.1),
+                        contentPadding: EdgeInsets.symmetric(vertical: 30),
+                        prefixIcon: Icon(IconlyLight.message),
                         hintText: "Votre addresse mail",
                       ),
                       onFieldSubmitted: (value) {
@@ -134,6 +163,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fillColor: Colors.black.withOpacity(0.1),
                         contentPadding: EdgeInsets.symmetric(vertical: 30),
                         hintText: "Mot de Passe",
+                        prefixIcon: Icon(IconlyLight.lock),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _isObscur = !_isObscur;
+                            });
+                          },
+                          icon: _isObscur
+                              ? Icon(Icons.visibility)
+                              : Icon(Icons.visibility_off),
+                        ),
+                      ),
+                      validator: (value) {
+                        return MyValidators.passwordValidator(value);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: _repeatePasswordController,
+                      focusNode: _repeatPasswordFocus,
+                      textInputAction: TextInputAction.done,
+                      obscureText: _isObscur ? true : false,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                width: 29, color: Colors.transparent)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide:
+                                BorderSide(width: 0, color: Colors.orange)),
+                        filled: true,
+                        fillColor: Colors.black.withOpacity(0.1),
+                        contentPadding: EdgeInsets.symmetric(vertical: 30),
+                        hintText: "Écrire de nouveau le mot de passe",
                         prefixIcon: Icon(IconlyLight.lock),
                         suffixIcon: IconButton(
                           onPressed: () {
