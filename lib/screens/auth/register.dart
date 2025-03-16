@@ -2,35 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smart_shop_v1/consts/validator.dart';
-import 'package:smart_shop_v1/screens/auth/register.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   bool _isObscur = true;
-  late final TextEditingController _emailController;
-  late final TextEditingController _passwordController;
+  late final TextEditingController,
+      _nameController,
+      _emailController,
+      _passwordController,
+      _repeatePasswordController;
 
-  late final FocusNode _emailFocus;
-  late final FocusNode _passwordFocusNode;
+  late final FocusNode _nameFocus,
+      _emailFocus,
+      _passwordFocusNode,
+      _repeatPasswordFocus;
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+    _nameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _repeatePasswordController = TextEditingController();
+    _nameFocus = FocusNode();
     _emailFocus = FocusNode();
     _passwordFocusNode = FocusNode();
+    _repeatPasswordFocus = FocusNode();
   }
 
   @override
@@ -225,19 +233,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         SubtitleTextWidget(label: "Je suis nouveau ici /"),
                         TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RegisterScreen()));
-                            },
+                            onPressed: () {},
                             child: Text(
                               "Créer un compte",
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue,
-                                decoration: TextDecoration.underline,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue),
                             ))
                       ],
                     )
