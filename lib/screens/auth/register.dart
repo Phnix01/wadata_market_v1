@@ -77,7 +77,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: TitleTextWidget(label: "Bon retour !! 😊"),
+                child: Column(
+                  children: [
+                    TitleTextWidget(label: "Création d'un nouveau compte"),
+                    SubtitleTextWidget(
+                        label:
+                            " La création d'un compte permettra d'acheter et bénéficier des promos")
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 16,
@@ -86,8 +93,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   children: [
                     TextFormField(
-                      controller: _emailController,
-                      focusNode: _emailFocus,
+                      controller: _nameController,
+                      focusNode: _nameFocus,
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
@@ -106,10 +113,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintText: "Nom complet",
                       ),
                       onFieldSubmitted: (value) {
-                        FocusScope.of(context).requestFocus(_passwordFocusNode);
+                        FocusScope.of(context).requestFocus(_emailFocus);
                       },
                       validator: (value) {
-                        return MyValidators.emailValidator(value);
+                        return MyValidators.displaynamevalidator(value);
                       },
                     ),
                     const SizedBox(
@@ -175,6 +182,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               : Icon(Icons.visibility_off),
                         ),
                       ),
+                      onFieldSubmitted: (value) {
+                        FocusScope.of(context)
+                            .requestFocus(_repeatPasswordFocus);
+                      },
                       validator: (value) {
                         return MyValidators.passwordValidator(value);
                       },
@@ -212,23 +223,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               : Icon(Icons.visibility_off),
                         ),
                       ),
+                      onFieldSubmitted: (value) {
+                        FocusScope.of(context).unfocus();
+                      },
                       validator: (value) {
-                        return MyValidators.passwordValidator(value);
+                        return MyValidators.repeatPasswordValidator();
                       },
                     ),
                     const SizedBox(
                       height: 20,
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "mot de passe oublié".toUpperCase(),
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                            ),
-                          )),
                     ),
                     const SizedBox(height: 16),
                     SizedBox(
@@ -241,73 +244,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             padding: EdgeInsets.all(12),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.0))),
-                        label: Text("Se Connecter"),
-                        icon: Icon(Icons.login),
+                        label: Text("Créer le compte"),
+                        icon: Icon(IconlyLight.addUser),
                       ),
                     ),
                     const SizedBox(height: 18),
-                    SubtitleTextWidget(label: "Ou Se Connecter avec..."),
-                    const SizedBox(height: 18),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SizedBox(
-                          width: 150,
-                          child: ElevatedButton.icon(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              elevation: 5,
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.black,
-                            ),
-                            label: Text("Google"),
-                            icon: FaIcon(
-                              FontAwesomeIcons.google,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 150,
-                          child: ElevatedButton.icon(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.all(12),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                elevation: 5,
-                                foregroundColor: Colors.black87),
-                            label: Text("Facebook"),
-                            icon: FaIcon(
-                              FontAwesomeIcons.facebook,
-                              color: Colors.blueAccent,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 45.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SubtitleTextWidget(label: "Je suis nouveau ici /"),
-                        TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "Créer un compte",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue),
-                            ))
-                      ],
-                    )
                   ],
                 ),
               )
