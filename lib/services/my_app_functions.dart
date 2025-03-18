@@ -98,6 +98,16 @@ class MyAppFunctions {
               icon: Icon(Icons.image_search_sharp),
               label: Text("Galérie"),
             ),
+            TextButton.icon(
+              onPressed: () {
+                removeFCT();
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              icon: Icon(Icons.remove_circle_outline_outlined),
+              label: Text("Retirer"),
+            ),
           ],
         ),
       ),
