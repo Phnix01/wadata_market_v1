@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
+import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
 class MyAppFunctions {
   static Future<void> showErrorOrWarningDialog({
@@ -64,5 +65,32 @@ class MyAppFunctions {
             ),
           );
         });
+  }
+
+  static Future<AlertDialog> imagePickerDialog({
+    required BuildContext context,
+    required Function cameraFCT,
+    required Function galleryFCT,
+    required Function removeFCT,
+  }) async {
+    return await AlertDialog(
+      title: Center(child: TitleTextWidget(label: "Choisir une option")),
+      content: SingleChildScrollView(
+        child: ListBody(
+          children: [
+            TextButton.icon(
+              onPressed: () {
+                cameraFCT();
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              icon: Icon(Icons.camera_alt),
+              label: Text("Caméra"),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
