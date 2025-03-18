@@ -88,6 +88,16 @@ class MyAppFunctions {
               icon: Icon(Icons.camera_alt),
               label: Text("Caméra"),
             ),
+            TextButton.icon(
+              onPressed: () {
+                galleryFCT();
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              icon: Icon(Icons.image_search_sharp),
+              label: Text("Galérie"),
+            ),
           ],
         ),
       ),
