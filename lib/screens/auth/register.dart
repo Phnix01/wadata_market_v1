@@ -3,6 +3,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smart_shop_v1/consts/validator.dart';
+import 'package:smart_shop_v1/services/my_app_functions.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
 import 'package:smart_shop_v1/widgets/auth/image_picker_widget.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
@@ -56,6 +57,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _registerFCT() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
+  }
+
+  Future<void> localImagePicker() async {
+    final ImagePicker imagePicker = ImagePicker();
+    await MyAppFunctions.imagePickerDialog(
+        context: context,
+        cameraFCT: () async {
+          _pickedImage =
+              await imagePicker.pickImage(source: ImageSource.camera);
+          setState(() {});
+        },
+        galleryFCT: () async {
+          _pickedImage =
+              await imagePicker.pickImage(source: ImageSource.gallery);
+          setState(() {});
+        },
+        removeFCT: () {
+          setState(() {
+            _pickedImage = null;
+          });
+        });
   }
 
   @override
