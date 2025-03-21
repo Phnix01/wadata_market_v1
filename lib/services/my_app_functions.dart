@@ -67,50 +67,55 @@ class MyAppFunctions {
         });
   }
 
-  static Future<AlertDialog> imagePickerDialog({
+  static Future<Widget> imagePickerDialog({
     required BuildContext context,
     required Function cameraFCT,
     required Function galleryFCT,
     required Function removeFCT,
   }) async {
-    return await AlertDialog(
-      title: Center(child: TitleTextWidget(label: "Choisir une option")),
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: [
-            TextButton.icon(
-              onPressed: () {
-                cameraFCT();
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
-              },
-              icon: Icon(Icons.camera_alt),
-              label: Text("Caméra"),
-            ),
-            TextButton.icon(
-              onPressed: () {
-                galleryFCT();
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
-              },
-              icon: Icon(Icons.image_search_sharp),
-              label: Text("Galérie"),
-            ),
-            TextButton.icon(
-              onPressed: () {
-                removeFCT();
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
-              },
-              icon: Icon(Icons.remove_circle_outline_outlined),
-              label: Text("Retirer"),
-            ),
-          ],
-        ),
-      ),
+    print("affichage en cours ...");
+    return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Choisissez une option"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: Icon(Icons.camera),
+                title: Text("Caméra"),
+                onTap: () {
+                  cameraFCT();
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.image),
+                title: Text("Galerie"),
+                onTap: () {
+                  galleryFCT();
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.delete),
+                title: Text("Supprimer"),
+                onTap: () {
+                  removeFCT();
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

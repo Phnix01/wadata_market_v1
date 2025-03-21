@@ -7,7 +7,7 @@ class ImagePickerWidget extends StatelessWidget {
   const ImagePickerWidget(
       {super.key, this.pickedImage, required this.function});
   final XFile? pickedImage;
-  final Function function;
+  final VoidCallback function;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,10 @@ class ImagePickerWidget extends StatelessWidget {
               color: Colors.blue,
               child: InkWell(
                 borderRadius: BorderRadius.circular(12.0),
-                onTap: () {},
+                onTap: () {
+                  print(" clique");
+                  function();
+                },
                 splashColor: Colors.red,
                 child: Padding(
                   padding: EdgeInsets.all(6.0),

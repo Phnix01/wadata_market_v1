@@ -119,7 +119,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: size.width * 0.3,
                 child: ImagePickerWidget(
                   pickedImage: _pickedImage,
-                  function: localImagePicker,
+                  function: () async {
+                    await localImagePicker();
+                  },
                 ),
               ),
               const SizedBox(
