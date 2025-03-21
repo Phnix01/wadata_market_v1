@@ -67,7 +67,7 @@ class MyAppFunctions {
         });
   }
 
-  static Future<Widget> imagePickerDialog({
+  static Future<void> imagePickerDialog({
     required BuildContext context,
     required Function cameraFCT,
     required Function galleryFCT,
