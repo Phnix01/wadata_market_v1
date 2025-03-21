@@ -73,6 +73,7 @@ flutter:
     - assets/images/banners/
     - assets/images/bag/
     - assets/images/
+    - assets/
     - assets/images/categories/
     - assets/images/profile/
     - assets/images/dashboard/
