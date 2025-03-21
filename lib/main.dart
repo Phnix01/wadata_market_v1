@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
           home: const LoginScreen(),
           routes: {
             ProductDetails.routName: (context) => ProductDetails(),
+            RootScreen.routeName: (context) => RootScreen(),
           },
         );
       }),

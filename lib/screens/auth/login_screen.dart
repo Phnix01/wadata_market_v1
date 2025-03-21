@@ -76,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 16,
               ),
               Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
