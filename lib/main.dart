@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           theme: Styles.themeData(
               isDark: themeProvider.getIsDarkTheme, BuildContext: context),
-          home: const ForgotPasswordScreen(),
+          home: RootScreen(),
           routes: {
             ProductDetails.routName: (context) => ProductDetails(),
             RootScreen.routeName: (context) => RootScreen(),

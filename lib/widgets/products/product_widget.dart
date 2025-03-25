@@ -35,7 +35,7 @@ class _ProductWidgetState extends State<ProductWidget> {
               borderRadius: BorderRadius.circular(12.0),
               child: FancyShimmerImage(
                 imageUrl: widget.image ?? AppConstants.imageUrl,
-                height: size.height * 0.15,
+                height: size.height * 0.18,
                 width: double.infinity,
               ),
             ),
@@ -68,7 +68,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 children: [
                   Flexible(
                     child: SubtitleTextWidget(
-                      label: " ${widget.price}\+\" Fcfa\"" ?? "0 Fcfa",
+                      label: " ${widget.price} Fcfa" ?? "0 Fcfa",
                       fontWeight: FontWeight.w600,
                       color: Colors.blue,
                     ),
