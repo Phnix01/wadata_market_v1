@@ -64,7 +64,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 children: [
                   Flexible(
                     child: SubtitleTextWidget(
-                      label: "150.000\$",
+                      label: "150.000 Fcfa",
                       fontWeight: FontWeight.w600,
                       color: Colors.blue,
                     ),
