@@ -1,6 +1,8 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_shop_v1/models/product_model.dart';
+import 'package:smart_shop_v1/providers/products_provider.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
 import 'package:smart_shop_v1/widgets/products/product_widget.dart';
 
@@ -27,6 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider = Provider.of<ProductsProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -80,13 +83,12 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
               child: DynamicHeightGridView(
                 builder: (context, index) {
-                  return ProductWidget(
-                    image: ProductModel.products[index].productImage,
-                    price: ProductModel.products[index].productPrice,
-                    title: ProductModel.products[index].productTitle,
+                  return ChangeNotifierProvider.value(
+                    value: productsProvider.getProducts[index],
+                    child: ProductWidget(),
                   );
                 },
-                itemCount: ProductModel.products.length,
+                itemCount: productsProvider.getProducts.length,
                 crossAxisCount: 2,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_shop_v1/consts/styles.dart';
+import 'package:smart_shop_v1/providers/products_provider.dart';
 import 'package:smart_shop_v1/providers/theme_provider.dart';
 import 'package:smart_shop_v1/root_screen.dart';
 import 'package:smart_shop_v1/screens/auth/forgot_password_screen.dart';
@@ -28,6 +29,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) {
             return ThemeProvider();
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return ProductsProvider();
           },
         )
       ],
