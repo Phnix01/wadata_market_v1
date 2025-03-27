@@ -46,7 +46,8 @@ class _SearchScreenState extends State<SearchScreen> {
             AssetsManager.shoppingCart,
           ),
         ),
-        title: Text(" Rechercher un produit"),
+        title: Text(
+            passedCategory == null ? " Rechercher un produit" : passedCategory),
       ),
       body: Padding(
         padding: const EdgeInsets.all(9.0),
