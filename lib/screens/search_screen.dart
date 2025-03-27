@@ -30,6 +30,11 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final productsProvider = Provider.of<ProductsProvider>(context);
+    String? passedCategory =
+        ModalRoute.of(context)!.settings.arguments as String?;
+    List<ProductModel> productList = passedCategory == null
+        ? productsProvider.products
+        : productsProvider.findByCategory(categoryName: passedCategory);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -84,10 +89,10 @@ class _SearchScreenState extends State<SearchScreen> {
               child: DynamicHeightGridView(
                 builder: (context, index) {
                   return ProductWidget(
-                    productId: productsProvider.getProducts[index].productId,
+                    productId: productList[index].productId,
                   );
                 },
-                itemCount: productsProvider.getProducts.length,
+                itemCount: productList.length,
                 crossAxisCount: 2,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
