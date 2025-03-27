@@ -27,9 +27,9 @@ class ProductDetails extends StatelessWidget {
         child: Column(
           children: [
             FancyShimmerImage(
-              imageUrl: "https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png",
+              imageUrl: getCurrentProduct!.productImage,
               width: double.infinity,
-              height: size.width * 0.6,
+              height: size.width * 0.7,
             ),
             SizedBox(
               height: 20,
