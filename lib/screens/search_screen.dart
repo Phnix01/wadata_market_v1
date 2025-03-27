@@ -7,6 +7,7 @@ import 'package:smart_shop_v1/services/assets_manager.dart';
 import 'package:smart_shop_v1/widgets/products/product_widget.dart';
 
 class SearchScreen extends StatefulWidget {
+  static String routName = "./SearchScreen";
   const SearchScreen({super.key});
 
   @override
@@ -34,7 +35,8 @@ class _SearchScreenState extends State<SearchScreen> {
         ModalRoute.of(context)!.settings.arguments as String?;
     List<ProductModel> productList = passedCategory == null
         ? productsProvider.products
-        : productsProvider.findByCategory(categoryName: passedCategory);
+        : productsProvider.findByCategory(
+            categoryName: passedCategory.toLowerCase());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,

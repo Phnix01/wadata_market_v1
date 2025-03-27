@@ -10,6 +10,7 @@ import 'package:smart_shop_v1/screens/auth/forgot_password_screen.dart';
 import 'package:smart_shop_v1/screens/auth/login_screen.dart';
 import 'package:smart_shop_v1/screens/home_screen.dart';
 import 'package:smart_shop_v1/screens/inner_screen.dart/product_detail.dart';
+import 'package:smart_shop_v1/screens/search_screen.dart';
 
 void main() {
   //Do this in main.dart
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           routes: {
             ProductDetails.routName: (context) => ProductDetails(),
             RootScreen.routeName: (context) => RootScreen(),
+            SearchScreen.routName: (context) => SearchScreen(),
           },
         );
       }),
