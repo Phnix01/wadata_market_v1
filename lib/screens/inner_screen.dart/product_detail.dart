@@ -1,6 +1,8 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_shop_v1/providers/products_provider.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
@@ -11,6 +13,9 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider = Provider.of<ProductsProvider>(context);
+    String? productId = ModalRoute.of(context)!.settings.arguments as String?;
+    final getCurrentProduct = productsProvider.findByProdId(productId!);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +41,7 @@ class ProductDetails extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      "Product Name",
+                      "${getCurrentProduct?.productTitle}",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -45,7 +50,7 @@ class ProductDetails extends StatelessWidget {
                     width: 15,
                   ),
                   SubtitleTextWidget(
-                    label: "1550.00\$",
+                    label: "${getCurrentProduct?.productPrice} Fcfa",
                     fontWeight: FontWeight.w600,
                     color: Colors.blue,
                   ),
@@ -96,10 +101,11 @@ class ProductDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TitleTextWidget(
-                    label: "À propos de ce produit",
+                    label: "Caractéristiques:",
                     fontSize: 14,
                   ),
-                  SubtitleTextWidget(label: "Iphone 12 "),
+                  SubtitleTextWidget(
+                      label: " Dans ${getCurrentProduct!.productCategory}"),
                 ],
               ),
             ),
@@ -108,9 +114,8 @@ class ProductDetails extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Description" * 10,
-                style: TextStyle(fontSize: 16),
+              child: SubtitleTextWidget(
+                label: getCurrentProduct.productDescription,
               ),
             ),
           ],

@@ -83,11 +83,8 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
               child: DynamicHeightGridView(
                 builder: (context, index) {
-                  return ChangeNotifierProvider.value(
-                    value: productsProvider.getProducts[index],
-                    child: ProductWidget(
-                      productId: "",
-                    ),
+                  return ProductWidget(
+                    productId: productsProvider.getProducts[index].productId,
                   );
                 },
                 itemCount: productsProvider.getProducts.length,

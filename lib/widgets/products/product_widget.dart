@@ -22,7 +22,6 @@ class ProductWidget extends StatefulWidget {
 class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
-    final productsModelProider = Provider.of<ProductModel>(context);
     final productsProvider = Provider.of<ProductsProvider>(context);
     final getCurrentProduct = productsProvider.findByProdId(widget.productId);
     Size size = MediaQuery.of(context).size;
@@ -33,7 +32,11 @@ class _ProductWidgetState extends State<ProductWidget> {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, ProductDetails.routName);
+                Navigator.pushNamed(
+                  context,
+                  ProductDetails.routName,
+                  arguments: getCurrentProduct.productId,
+                );
               },
               child: Column(
                 children: [

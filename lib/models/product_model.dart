@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductModel extends ChangeNotifier {
-  final String productId,
-      productTitle,
-      productPrice,
-      productCategory,
-      productDescription,
-      productImage,
-      productQuantity;
+  final String productId;
+  final String productTitle;
+  final String productPrice;
+  final String productCategory;
+  final String productDescription;
+  final String productImage;
+  final String productQuantity;
 
   ProductModel({
     required this.productId,
