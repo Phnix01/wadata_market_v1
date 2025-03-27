@@ -5,6 +5,7 @@ import 'package:smart_shop_v1/models/product_model.dart';
 import 'package:smart_shop_v1/providers/products_provider.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
 import 'package:smart_shop_v1/widgets/products/product_widget.dart';
+import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
 class SearchScreen extends StatefulWidget {
   static String routName = "./SearchScreen";
@@ -28,9 +29,11 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
+  List<ProductModel> productListSearch = [];
   @override
   Widget build(BuildContext context) {
     final productsProvider = Provider.of<ProductsProvider>(context);
+
     String? passedCategory =
         ModalRoute.of(context)!.settings.arguments as String?;
     List<ProductModel> productList = passedCategory == null
@@ -84,18 +87,34 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 contentPadding: const EdgeInsets.all(20),
               ),
+              onSubmitted: (value) {
+                setState(() {
+                  productListSearch = productsProvider.searchQuery(
+                      searchText: _searcherTextController.text);
+                });
+              },
             ),
             SizedBox(
               height: 20,
             ),
+            if (_searcherTextController.text.isNotEmpty &&
+                productListSearch.isEmpty) ...[
+              const Center(
+                child: TitleTextWidget(label: " Aucun resultat"),
+              )
+            ],
             Expanded(
               child: DynamicHeightGridView(
                 builder: (context, index) {
                   return ProductWidget(
-                    productId: productList[index].productId,
+                    productId: _searcherTextController.text.isNotEmpty
+                        ? productListSearch[index].productId
+                        : productList[index].productId,
                   );
                 },
-                itemCount: productList.length,
+                itemCount: _searcherTextController.text.isNotEmpty
+                    ? productListSearch.length
+                    : productList.length,
                 crossAxisCount: 2,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
