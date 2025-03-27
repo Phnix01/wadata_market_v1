@@ -46,6 +46,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                       imageUrl: getCurrentProduct.productImage,
                       height: size.height * 0.19,
                       width: double.infinity,
+                      boxFit: BoxFit.fitHeight,
                     ),
                   ),
                   const SizedBox(

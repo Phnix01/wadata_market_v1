@@ -30,6 +30,7 @@ class ProductDetails extends StatelessWidget {
               imageUrl: getCurrentProduct!.productImage,
               width: double.infinity,
               height: size.width * 0.7,
+              boxFit: BoxFit.fitHeight,
             ),
             SizedBox(
               height: 20,
