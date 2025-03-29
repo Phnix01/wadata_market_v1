@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_shop_v1/providers/cart_provider.dart';
 import 'package:smart_shop_v1/screens/cart/cart_widget.dart';
 import 'package:smart_shop_v1/screens/cart/empty_card_widget.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
@@ -10,6 +12,7 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     bool _isEmpty = false;
     return _isEmpty
         ? Scaffold(body: EmptyCardWidget())
