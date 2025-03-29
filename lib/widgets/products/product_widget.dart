@@ -102,8 +102,13 @@ class _ProductWidgetState extends State<ProductWidget> {
                               child: Padding(
                                 padding: EdgeInsets.all(6.0),
                                 child: Icon(
-                                  Icons.add_shopping_cart_outlined,
+                                  cartProvider.isProductInCart(
+                                          productId:
+                                              getCurrentProduct.productId)
+                                      ? Icons.check
+                                      : Icons.add_shopping_cart_outlined,
                                   size: 20,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
