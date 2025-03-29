@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_shop_v1/consts/app_constants.dart';
 import 'package:smart_shop_v1/models/product_model.dart';
+import 'package:smart_shop_v1/providers/cart_provider.dart';
 import 'package:smart_shop_v1/providers/products_provider.dart';
 import 'package:smart_shop_v1/screens/inner_screen.dart/product_detail.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
@@ -24,6 +25,7 @@ class _ProductWidgetState extends State<ProductWidget> {
   Widget build(BuildContext context) {
     final productsProvider = Provider.of<ProductsProvider>(context);
     final getCurrentProduct = productsProvider.findByProdId(widget.productId);
+    final cartProvider = Provider.of<CartProvider>(context);
     Size size = MediaQuery.of(context).size;
 
     return getCurrentProduct == null
@@ -89,7 +91,14 @@ class _ProductWidgetState extends State<ProductWidget> {
                             color: Colors.lightBlue,
                             child: InkWell(
                               splashColor: Colors.red,
-                              onTap: () {},
+                              onTap: () {
+                                if (cartProvider.isProductInCart(
+                                    productId: getCurrentProduct.productId)) {
+                                  return;
+                                }
+                                cartProvider.addProductTOCart(
+                                    productId: getCurrentProduct.productId);
+                              },
                               child: Padding(
                                 padding: EdgeInsets.all(6.0),
                                 child: Icon(
