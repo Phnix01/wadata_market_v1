@@ -15,4 +15,8 @@ class CartProvider extends ChangeNotifier {
     );
     notifyListeners();
   }
+
+  bool isProductInCart({required String productId}) {
+    return _cartItems.containsKey(productId);
+  }
 }
