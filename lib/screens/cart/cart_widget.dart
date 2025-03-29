@@ -32,8 +32,7 @@ class CartWidget extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12.0),
                       child: FancyShimmerImage(
-                        imageUrl:
-                            'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+                        imageUrl: getCurrentProduct.productImage,
                         height: size.height * 0.2,
                         width: size.height * 0.2,
                       ),
@@ -49,7 +48,7 @@ class CartWidget extends StatelessWidget {
                               SizedBox(
                                 width: size.width * 0.6,
                                 child: TitleTextWidget(
-                                  label: "Title" * 15,
+                                  label: getCurrentProduct.productTitle,
                                   maxLines: 2,
                                 ),
                               ),
@@ -75,8 +74,8 @@ class CartWidget extends StatelessWidget {
                           Row(
                             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const SubtitleTextWidget(
-                                label: "16.00\$",
+                              SubtitleTextWidget(
+                                label: "${getCurrentProduct.productPrice} Fcfa",
                                 color: Colors.blue,
                               ),
                               const Spacer(),
@@ -95,7 +94,8 @@ class CartWidget extends StatelessWidget {
                                       });
                                 },
                                 icon: const Icon(IconlyLight.arrowDown2),
-                                label: const Text("Qty: 6"),
+                                label: Text(
+                                    "Qty: ${getCurrentProduct.productQuantity}"),
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(width: 1),
                                   shape: RoundedRectangleBorder(
