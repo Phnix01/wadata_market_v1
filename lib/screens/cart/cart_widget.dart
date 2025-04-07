@@ -29,12 +29,14 @@ class CartWidget extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // image du produit dans le panier
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12.0),
                       child: FancyShimmerImage(
                         imageUrl: getCurrentProduct.productImage,
                         height: size.height * 0.2,
                         width: size.height * 0.2,
+                        boxFit: BoxFit.fitWidth,
                       ),
                     ),
                     const SizedBox(
@@ -45,6 +47,7 @@ class CartWidget extends StatelessWidget {
                         children: [
                           Row(
                             children: [
+                              // titre du produit
                               SizedBox(
                                 width: size.width * 0.6,
                                 child: TitleTextWidget(

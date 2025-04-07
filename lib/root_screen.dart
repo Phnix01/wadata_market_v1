@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_shop_v1/providers/cart_provider.dart';
 import 'package:smart_shop_v1/screens/cart/cart_screen.dart';
 import 'package:smart_shop_v1/screens/home_screen.dart';
 import 'package:smart_shop_v1/screens/profile_screen.dart';
@@ -21,6 +23,7 @@ class _RootScreenState extends State<RootScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     screens = const [
       HomeScreen(),
       SearchScreen(),
@@ -32,6 +35,7 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       body: PageView(
         controller: controller,
@@ -63,7 +67,7 @@ class _RootScreenState extends State<RootScreen> {
             icon: Badge(
                 backgroundColor: Colors.blue,
                 textColor: Colors.white,
-                label: Text("4"),
+                label: Text(cartProvider.getCartItems.length.toString()),
                 child: Icon(IconlyLight.bag2)),
             label: "Panier",
           ),
