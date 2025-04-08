@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_shop_v1/providers/cart_provider.dart';
+import 'package:smart_shop_v1/providers/products_provider.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
@@ -10,6 +13,8 @@ class CartBottomSheetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+    final productsProvider = Provider.of<ProductsProvider>(context);
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
@@ -27,12 +32,14 @@ class CartBottomSheetWidget extends StatelessWidget {
               Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     FittedBox(
                         child: TitleTextWidget(
-                            label: "Total (6 products/9 items)")),
+                            label:
+                                "Total ( ${cartProvider.getCartItems.length} produits/${cartProvider.getGty()} unités)")),
                     SubtitleTextWidget(
-                      label: "16.0\$",
+                      label:
+                          "${cartProvider.getTotal(productsProvider: productsProvider)} Fcfa",
                       color: Colors.blue,
                     ),
                   ],
