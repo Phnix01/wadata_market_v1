@@ -34,4 +34,12 @@ class CartProvider extends ChangeNotifier {
     });
     return total;
   }
+
+  int getGty() {
+    int total = 0;
+    _cartItems.forEach((key, value) {
+      total += value.quantity;
+    });
+    return total;
+  }
 }
