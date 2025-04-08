@@ -28,8 +28,7 @@ class CartProvider extends ChangeNotifier {
       if (getCurrentProduct == null) {
         total += 0.0;
       } else {
-        total +=
-            double.parse(getCurrentProduct.productDescription) * value.quantity;
+        total += double.parse(getCurrentProduct.productPrice) * value.quantity;
       }
     });
     return total;
