@@ -93,7 +93,7 @@ class CartWidget extends StatelessWidget {
                                               topRight: Radius.circular(30))),
                                       context: context,
                                       builder: (context) {
-                                        return QuantityBottomSheet(
+                                        return QuantityBottomSheetWidget(
                                           cartModel: cartModel,
                                         );
                                       });
