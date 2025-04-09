@@ -5,6 +5,7 @@ import 'package:smart_shop_v1/screens/cart/bottom_checkout.dart';
 import 'package:smart_shop_v1/screens/cart/cart_widget.dart';
 import 'package:smart_shop_v1/screens/cart/empty_card_widget.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
+import 'package:smart_shop_v1/services/my_app_functions.dart';
 import 'package:smart_shop_v1/widgets/empty_bag.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
@@ -41,7 +42,14 @@ class CartScreen extends StatelessWidget {
               actions: [
                 IconButton(
                   onPressed: () {
-                    cartProvider.clearLocalCart();
+                    MyAppFunctions.showErrorOrWarningDialog(
+                      isError: false,
+                      context: context,
+                      subtitle: "Clear cart?",
+                      fct: () {
+                        cartProvider.clearLocalCart();
+                      },
+                    );
                   },
                   icon: const Icon(
                     Icons.delete_forever_rounded,
