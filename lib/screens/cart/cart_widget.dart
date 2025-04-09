@@ -93,7 +93,9 @@ class CartWidget extends StatelessWidget {
                                               topRight: Radius.circular(30))),
                                       context: context,
                                       builder: (context) {
-                                        return QuantityBottomSheet();
+                                        return QuantityBottomSheet(
+                                          cartModel: cartModel,
+                                        );
                                       });
                                 },
                                 icon: const Icon(IconlyLight.arrowDown2),
