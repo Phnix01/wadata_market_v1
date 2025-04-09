@@ -49,4 +49,14 @@ class CartProvider extends ChangeNotifier {
             CartId: cartItem.CartId, productId: productId, quantity: qty));
     notifyListeners();
   }
+
+  void clearLocalCart() {
+    _cartItems.clear();
+    notifyListeners();
+  }
+
+  void removeItem({required String productId}) {
+    _cartItems.remove(productId);
+    notifyListeners();
+  }
 }
