@@ -40,7 +40,9 @@ class CartScreen extends StatelessWidget {
                   label: "Panier (${cartProvider.getCartItems.length})"),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    cartProvider.clearLocalCart();
+                  },
                   icon: const Icon(
                     Icons.delete_forever_rounded,
                     color: Colors.red,
