@@ -22,10 +22,10 @@ class CartScreen extends StatelessWidget {
         ? Scaffold(
             body: EmptyBagWidget(
               imagePath: AssetsManager.shoppingBasket,
-              title: "Votre Panier est vide",
+              title: "Your cart is empty",
               subtitle:
-                  "Apparement Votre Panier est Vide, ajouter un produit dans votre Panier et Passez à l\'action",
-              buttonText: "Acheter maintenant",
+                  "Looks like your cart is empty add something and make me happy",
+              buttonText: "Shop now",
             ),
           )
         : Scaffold(
@@ -38,7 +38,7 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
               title: TitleTextWidget(
-                  label: "Panier (${cartProvider.getCartItems.length})"),
+                  label: "Cart (${cartProvider.getCartItems.length})"),
               actions: [
                 IconButton(
                   onPressed: () {

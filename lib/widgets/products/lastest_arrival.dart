@@ -3,6 +3,10 @@ import 'dart:developer';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_shop_v1/models/product_model.dart';
+import 'package:smart_shop_v1/providers/cart_provider.dart';
+import 'package:smart_shop_v1/screens/inner_screen.dart/product_detail.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 
 class LastestArrival extends StatelessWidget {
@@ -11,11 +15,13 @@ class LastestArrival extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final productsModel = Provider.of<ProductModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () {
-          log("ToDo add the navigate to the product details screen");
+        onTap: () async {
+          await Navigator.pushNamed(context, ProductDetails.routName,arguments:  productsModel.productId,);
         },
         child: SizedBox(
           width: size.width * 0.45,
@@ -27,7 +33,7 @@ class LastestArrival extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12.0),
                   child: FancyShimmerImage(
                     imageUrl:
-                        "https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png",
+                       productsModel.productImage,
                     height: size.width * 0.24,
                     width: size.width * 0.32,
                   ),
@@ -67,7 +73,7 @@ class LastestArrival extends StatelessWidget {
                     ),
                     const FittedBox(
                       child: SubtitleTextWidget(
-                        label: "1550.00\$",
+                        label: " Fcfa",
                         fontWeight: FontWeight.w600,
                         color: Colors.blue,
                       ),
