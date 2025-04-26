@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "662395477749",
+    "project_id": "yoummy-shop",
+    "storage_bucket": "yoummy-shop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662395477749:android:551df626353a36c480afbc",
+        "android_client_info": {
+          "package_name": "com.example.smart_shop_v1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJMoJBMHy3t_CFk8ZTFQtBNIyOQAVgocc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
