@@ -3,20 +3,22 @@ import 'package:smart_shop_v1/models/whishlist_model.dart';
 import 'package:uuid/uuid.dart';
 
 
-class WhishlistProvider with ChangeNotifier{
-  final Map<String, WhishListModel> _whishlistItems={};
-  Map<String,WhishListModel> get getWhishlists{
-    return _whishlistItems;
+class WishlistProvider with ChangeNotifier{
+  final Map<String, WhishListModel> _wishlistItems={};
+  Map<String,WhishListModel> get getWishlists{
+    return _wishlistItems;
   }
 
-  void addOrRemoveFromWhishlist({required String productId}){
-    if(_whishlistItems.containsKey(productId)){
-      _whishlistItems.remove(productId);
+  void addOrRemoveFromWishlist({required String productId}){
+    if(_wishlistItems.containsKey(productId)){
+      _wishlistItems.remove(productId);
     }
     else{
-      _whishlistItems.putIfAbsent(productId, ()=> WhishListModel(whishListId: const Uuid().v4(), productId: productId));
+      _wishlistItems.putIfAbsent(productId, ()=> WhishListModel(whishListId: const Uuid().v4(), productId: productId));
     }
     notifyListeners();
   }
-
+  bool isProdinWishlist({required String productId}){
+    return _wishlistItems.containsKey(productId);
+  }
 }
