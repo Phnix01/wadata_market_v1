@@ -21,4 +21,11 @@ class WishlistProvider with ChangeNotifier{
   bool isProdinWishlist({required String productId}){
     return _wishlistItems.containsKey(productId);
   }
+
+  void clearLocalWishlist(){
+    if(_wishlistItems.isNotEmpty){
+      _wishlistItems.clear();
+    }
+    notifyListeners();
+  }
 }
