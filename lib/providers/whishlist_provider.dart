@@ -9,5 +9,14 @@ class WhishlistProvider with ChangeNotifier{
     return _whishlistItems;
   }
 
+  void addOrRemoveFromWhishlist({required String productId}){
+    if(_whishlistItems.containsKey(productId)){
+      _whishlistItems.remove(productId);
+    }
+    else{
+      _whishlistItems.putIfAbsent(productId, ()=> WhishListModel(whishListId: const Uuid().v4(), productId: productId));
+    }
+    notifyListeners();
+  }
 
 }
