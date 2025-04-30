@@ -10,7 +10,7 @@ class AppNameTextWidget extends StatelessWidget {
       baseColor: Colors.purple,
       highlightColor: Colors.red,
       child: Text(
-        'Smart Shop',
+        'Wadata Market',
         style: TextStyle(
           fontSize: 24.0,
           fontFamily: 'Anton',

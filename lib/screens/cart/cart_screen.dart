@@ -3,11 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:smart_shop_v1/providers/cart_provider.dart';
 import 'package:smart_shop_v1/screens/cart/bottom_checkout.dart';
 import 'package:smart_shop_v1/screens/cart/cart_widget.dart';
-import 'package:smart_shop_v1/screens/cart/empty_card_widget.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
 import 'package:smart_shop_v1/services/my_app_functions.dart';
 import 'package:smart_shop_v1/widgets/empty_bag.dart';
-import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
 class CartScreen extends StatelessWidget {
@@ -22,10 +20,10 @@ class CartScreen extends StatelessWidget {
         ? Scaffold(
             body: EmptyBagWidget(
               imagePath: AssetsManager.shoppingBasket,
-              title: "Your cart is empty",
+              title: "Votre panier est vide",
               subtitle:
-                  "Looks like your cart is empty add something and make me happy",
-              buttonText: "Shop now",
+                  "Il semble que votre panier soit vide, veuillez le remplir de produits 😏",
+              buttonText: "Achetez maintenant",
             ),
           )
         : Scaffold(
@@ -38,7 +36,7 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
               title: TitleTextWidget(
-                  label: "Cart (${cartProvider.getCartItems.length})"),
+                  label: "Panier (${cartProvider.getCartItems.length})"),
               actions: [
                 IconButton(
                   onPressed: () {
