@@ -10,7 +10,7 @@ import 'package:smart_shop_v1/widgets/products/product_widget.dart';
 
 class WishlistScreen extends StatelessWidget {
   static const String routName = "/WishlistScreen";
-
+  final bool isEmpty = true;
   @override
   Widget build(BuildContext context) {
     final wishlistProvider = Provider.of<WishlistProvider>(context);

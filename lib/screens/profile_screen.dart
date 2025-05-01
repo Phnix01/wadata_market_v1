@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_shop_v1/screens/inner_screen.dart/wishlist.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
@@ -107,7 +108,9 @@ class ProfileScreen extends StatelessWidget {
                 CustomListTile(
                     imagePath: AssetsManager.wishlistSvg,
                     text: "vos favoris",
-                    function: () {}),
+                    function: () {
+                      Navigator.pushNamed(context, WishlistScreen.routName);
+                    }),
                 const SizedBox(height: 6),
                 CustomListTile(
                     imagePath: AssetsManager.recent,

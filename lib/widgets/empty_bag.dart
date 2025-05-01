@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
-
 import 'subtitle_text.dart';
 
 class EmptyBagWidget extends StatelessWidget {
@@ -10,63 +9,90 @@ class EmptyBagWidget extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.buttonText,
+    this.onPressed,
   });
 
   final String imagePath, title, subtitle, buttonText;
+  final VoidCallback? onPressed;
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     Size size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          Image.asset(
-            imagePath,
-            width: double.infinity,
-            height: size.height * 0.35,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const TitleTextWidget(
-            label: "Oups",
-            fontSize: 40,
-            color: Colors.red,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SubtitleTextWidget(
-            label: title,
-            fontWeight: FontWeight.w600,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SubtitleTextWidget(
-              label: subtitle,
-              fontWeight: FontWeight.w400,
+
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.15),
+                    spreadRadius: 4,
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  Image.asset(
+                    imagePath,
+                    width: size.width * 0.6,
+                    height: size.height * 0.3,
+                    fit: BoxFit.contain,
+                  ),
+                  const SizedBox(height: 24),
+                  const TitleTextWidget(
+                    label: "Oups...",
+                    fontSize: 36,
+                    color: Colors.redAccent,
+                  ),
+                  const SizedBox(height: 16),
+                  SubtitleTextWidget(
+                    label: title,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Colors.black87,
+                  ),
+                  const SizedBox(height: 12),
+                  SubtitleTextWidget(
+                    label: subtitle,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                    color: Colors.grey[700],
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: onPressed,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 16),
+                      backgroundColor: Colors.redAccent,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    child: Text(buttonText),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                elevation: 0,
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15)),
-            onPressed: () {},
-            child: Text(buttonText),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
