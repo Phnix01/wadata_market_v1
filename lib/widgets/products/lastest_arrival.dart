@@ -7,21 +7,26 @@ import 'package:provider/provider.dart';
 import 'package:smart_shop_v1/models/product_model.dart';
 import 'package:smart_shop_v1/providers/cart_provider.dart';
 import 'package:smart_shop_v1/screens/inner_screen.dart/product_detail.dart';
+import 'package:smart_shop_v1/widgets/products/heart_btn.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 
-class LastestArrival extends StatelessWidget {
-  const LastestArrival({super.key});
+class LatestArrivalProductsWidget extends StatelessWidget {
+  const LatestArrivalProductsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final productsModel = Provider.of<ProductModel>(context);
     final cartProvider = Provider.of<CartProvider>(context);
+
+    final viewedProdProvider = Provider.of<ViewedProdProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () async {
-          await Navigator.pushNamed(context, ProductDetails.routName,arguments:  productsModel.productId,);
+          viewedProdProvider.addViewedProd(productId: productsModel.productId);
+          await Navigator.pushNamed(context, ProductDetailsScreen.routName,
+              arguments: productsModel.productId);
         },
         child: SizedBox(
           width: size.width * 0.45,
@@ -32,15 +37,14 @@ class LastestArrival extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
                   child: FancyShimmerImage(
-                    imageUrl:
-                       productsModel.productImage,
+                    imageUrl: productsModel.productImage,
                     height: size.width * 0.24,
                     width: size.width * 0.32,
                   ),
                 ),
               ),
               const SizedBox(
-                width: 5,
+                width: 8,
               ),
               Flexible(
                 child: Column(
@@ -49,31 +53,55 @@ class LastestArrival extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "Title" * 15,
+                      productsModel.productTitle,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(
+                      height: 5,
                     ),
                     FittedBox(
                       child: Row(
                         children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              IconlyLight.heart,
-                            ),
+                          HeartButtonWidget(
+                            productId: productsModel.productId,
                           ),
                           IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.add_shopping_cart,
+                            onPressed: () async {
+                              if (cartProvider(
+                                  productId: productsModel.productId)) {
+                                return;
+                              }
+                              try {
+                                await cartProvider.addToCartFirebase(
+                                    productId: productsModel.productId,
+                                    qty: 1,
+                                    context: context);
+                              } catch (e) {
+                                await MyAppFunctions.showErrorOrWarningDialog(
+                                  context: context,
+                                  subtitle: e.toString(),
+                                  fct: () {},
+                                );
+                              }
+                            },
+                            icon: Icon(
+                              cartProvider.isProdinCart(
+                                productId: productsModel.productId,
+                              )
+                                  ? Icons.check
+                                  : Icons.add_shopping_cart_outlined,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const FittedBox(
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    FittedBox(
                       child: SubtitleTextWidget(
-                        label: " Fcfa",
+                        label: "${productsModel.productPrice}  Fcfa",
                         fontWeight: FontWeight.w600,
                         color: Colors.blue,
                       ),
