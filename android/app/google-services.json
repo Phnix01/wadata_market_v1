@@ -12,7 +12,12 @@
           "package_name": "com.example.smart_shop_v1"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "662395477749-kf5tpr3d7jsfa1n2rbshu6dhbjq9vr5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCJMoJBMHy3t_CFk8ZTFQtBNIyOQAVgocc"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662395477749-kf5tpr3d7jsfa1n2rbshu6dhbjq9vr5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
