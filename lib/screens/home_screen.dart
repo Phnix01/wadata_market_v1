@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_shop_v1/consts/app_constants.dart';
+import 'package:smart_shop_v1/providers/products_provider.dart';
 import 'package:smart_shop_v1/providers/theme_provider.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final productsProvider = Provider.of<ProductsProvider>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -73,12 +75,13 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: size.height * 0.2,
                 child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return LastestArrival();
-                  },
-                  itemCount: 20,
-                ),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return ChangeNotifierProvider.value(
+                          value: productsProvider.getProducts[index],
+                          child: const LatestArrivalProductsWidget());
+                    }),
               ),
               const TitleTextWidget(label: "Categories"),
               const SizedBox(
