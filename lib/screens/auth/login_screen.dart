@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smart_shop_v1/consts/validator.dart';
 import 'package:smart_shop_v1/screens/auth/register.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
+import 'package:smart_shop_v1/widgets/auth/google_btn.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
@@ -179,26 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SizedBox(
-                          width: 150,
-                          child: ElevatedButton.icon(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              elevation: 5,
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.black,
-                            ),
-                            label: Text("Google"),
-                            icon: FaIcon(
-                              FontAwesomeIcons.google,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
+                        GoogleBtn(),
                         SizedBox(
                           width: 150,
                           child: ElevatedButton.icon(
