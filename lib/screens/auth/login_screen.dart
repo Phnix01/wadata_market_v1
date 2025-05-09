@@ -9,6 +9,7 @@ import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+  static String routeName = "/LoginScreen";
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();

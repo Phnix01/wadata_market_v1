@@ -8,6 +8,7 @@ import 'package:smart_shop_v1/providers/products_provider.dart';
 import 'package:smart_shop_v1/providers/theme_provider.dart';
 import 'package:smart_shop_v1/providers/whishlist_provider.dart';
 import 'package:smart_shop_v1/root_screen.dart';
+import 'package:smart_shop_v1/screens/auth/login_screen.dart';
 import 'package:smart_shop_v1/screens/inner_screen.dart/product_detail.dart';
 import 'package:smart_shop_v1/screens/inner_screen.dart/wishlist.dart';
 import 'package:smart_shop_v1/screens/search_screen.dart';
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
                   RootScreen.routeName: (context) => RootScreen(),
                   SearchScreen.routName: (context) => SearchScreen(),
                   WishlistScreen.routName: (context) => WishlistScreen(),
+                  LoginScreen.routeName: (context) => LoginScreen()
                 },
               );
             }),

@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_shop_v1/screens/auth/login_screen.dart';
 import 'package:smart_shop_v1/screens/inner_screen.dart/wishlist.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
@@ -8,9 +10,15 @@ import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 import 'package:smart_shop_v1/providers/theme_provider.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -147,8 +155,12 @@ class ProfileScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                         foregroundColor: Colors.white),
-                    icon: Icon(Icons.login),
+                    icon: Icon(user == null ? Icons.login : Icons.logout),
                     onPressed: () async {
+                      if (user == null) {
+                        Navigator.pushReplacementNamed(
+                            context, LoginScreen.routeName);
+                      }
                       await showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
@@ -196,7 +208,8 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    label: Text("Se Deconnecter"),
+                    label:
+                        Text(user == null ? "Se Connecter" : "Se Deconnecter"),
                   ),
                 )
               ],
