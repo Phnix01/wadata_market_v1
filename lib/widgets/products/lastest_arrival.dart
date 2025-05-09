@@ -6,6 +6,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_shop_v1/models/product_model.dart';
 import 'package:smart_shop_v1/providers/cart_provider.dart';
+import 'package:smart_shop_v1/providers/viewed_recently_provider.dart';
 import 'package:smart_shop_v1/screens/inner_screen.dart/product_detail.dart';
 import 'package:smart_shop_v1/widgets/products/heart_btn.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
@@ -25,7 +26,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () async {
           viewedProdProvider.addViewedProd(productId: productsModel.productId);
-          await Navigator.pushNamed(context, ProductDetailsScreen.routName,
+          await Navigator.pushNamed(context, ProductDetails.routName,
               arguments: productsModel.productId);
         },
         child: SizedBox(
@@ -67,26 +68,16 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                             productId: productsModel.productId,
                           ),
                           IconButton(
-                            onPressed: () async {
-                              if (cartProvider(
+                            onPressed: () {
+                              if (cartProvider.isProductInCart(
                                   productId: productsModel.productId)) {
                                 return;
                               }
-                              try {
-                                await cartProvider.addToCartFirebase(
-                                    productId: productsModel.productId,
-                                    qty: 1,
-                                    context: context);
-                              } catch (e) {
-                                await MyAppFunctions.showErrorOrWarningDialog(
-                                  context: context,
-                                  subtitle: e.toString(),
-                                  fct: () {},
-                                );
-                              }
+                              cartProvider.addProductTOCart(
+                                  productId: productsModel.productId);
                             },
                             icon: Icon(
-                              cartProvider.isProdinCart(
+                              cartProvider.isProductInCart(
                                 productId: productsModel.productId,
                               )
                                   ? Icons.check
@@ -101,7 +92,7 @@ class LatestArrivalProductsWidget extends StatelessWidget {
                     ),
                     FittedBox(
                       child: SubtitleTextWidget(
-                        label: "${productsModel.productPrice}  Fcfa",
+                        label: "${productsModel.productPrice} FCfa",
                         fontWeight: FontWeight.w600,
                         color: Colors.blue,
                       ),
