@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   late final FocusNode _emailFocus;
   late final FocusNode _passwordFocusNode;
-
+  bool _isLoading = false;
+  final auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
 
   @override
