@@ -2,9 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_shop_v1/models/user_model.dart';
+import 'package:smart_shop_v1/providers/user_provider.dart';
 import 'package:smart_shop_v1/screens/auth/login_screen.dart';
+import 'package:smart_shop_v1/screens/inner_screen.dart/viewed_recently.dart';
 import 'package:smart_shop_v1/screens/inner_screen.dart/wishlist.dart';
+import 'package:smart_shop_v1/screens/loading_manager.dart';
 import 'package:smart_shop_v1/services/assets_manager.dart';
+import 'package:smart_shop_v1/services/my_app_functions.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
@@ -19,203 +24,221 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   User? user = FirebaseAuth.instance.currentUser;
+  UserModel? userModel;
+  bool _isLoading = true;
+  Future<void> fetchUserInfo() async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+      userModel = await userProvider.fetchUserInfo();
+    } catch (error) {
+      await MyAppFunctions.showErrorOrWarningDialog(
+        context: context,
+        subtitle: error.toString(),
+        fct: () {},
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    fetchUserInfo();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(
             AssetsManager.shoppingCart,
           ),
         ),
-        title: AppNameTextWidget(),
+        title: const AppNameTextWidget(),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Visibility(
-            visible: false,
-            child: Padding(
-              padding: EdgeInsets.all(18.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: TitleTextWidget(
+      body: LoadingManager(
+        isLoading: _isLoading,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Visibility(
+                visible: user == null ? true : false,
+                child: const Padding(
+                  padding: EdgeInsets.all(18.0),
+                  child: TitleTextWidget(
                     label:
-                        "Veuillez vous connecter pour avoir un access illimité !!"),
+                        "Veuillez vous connecter pour avoir un accès illimité",
+                  ),
+                ),
               ),
-            ),
-          ),
-          Visibility(
-            visible: true,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Row(
-                children: [
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.onBackground,
-                        width: 3,
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.account_circle,
-                      size: 50,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      TitleTextWidget(label: "Omar Farouk"),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      SubtitleTextWidget(
-                        label: "fomar9235@gmail.com",
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: EdgeInsets.all(14.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Divider(
-                  thickness: 1,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const TitleTextWidget(label: "General"),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomListTile(
-                    imagePath: AssetsManager.orderSvg,
-                    text: "vos commandes",
-                    function: () {}),
-                const SizedBox(height: 6),
-                CustomListTile(
-                    imagePath: AssetsManager.wishlistSvg,
-                    text: "vos favoris",
-                    function: () {
-                      Navigator.pushNamed(context, WishlistScreen.routName);
-                    }),
-                const SizedBox(height: 6),
-                CustomListTile(
-                    imagePath: AssetsManager.recent,
-                    text: "historique récent",
-                    function: () {}),
-                const SizedBox(height: 6),
-                CustomListTile(
-                  imagePath: AssetsManager.orderSvg,
-                  text: "votre adresse",
-                  function: () {},
-                ),
-                const SizedBox(height: 6),
-                Divider(
-                  thickness: 1,
-                ),
-                const SizedBox(height: 6),
-                TitleTextWidget(label: "Paramètre"),
-                const SizedBox(height: 10),
-                SwitchListTile(
-                    title: Text(themeProvider.getIsDarkTheme
-                        ? "Mode Sombre"
-                        : "Mode Light"),
-                    value: themeProvider.getIsDarkTheme,
-                    onChanged: (value) {
-                      themeProvider.setDarkTheme(value);
-                    }),
-                const SizedBox(height: 6),
-                Divider(
-                  thickness: 1,
-                ),
-                const SizedBox(height: 6),
-                Center(
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white),
-                    icon: Icon(user == null ? Icons.login : Icons.logout),
-                    onPressed: () async {
-                      if (user == null) {
-                        Navigator.pushReplacementNamed(
-                            context, LoginScreen.routeName);
-                      }
-                      await showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          icon: Icon(
-                            Icons.error_outline_outlined,
-                            size: 69,
-                            color: Colors.red,
-                          ),
-                          content: SizedBox(
-                            height: 100,
-                            child: Column(
-                              children: [
-                                TitleTextWidget(
-                                  label: "Se Deconnecter",
+              userModel == null
+                  ? const SizedBox.shrink()
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Theme.of(context).cardColor,
+                              border: Border.all(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  width: 3),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  userModel!.userImage,
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                SubtitleTextWidget(
-                                  label:
-                                      "Voulez-vous vraiment vous déconnecter?",
-                                )
-                              ],
-                            ),
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                "Annuler",
-                                style: TextStyle(
-                                  color: Colors.red,
-                                ),
+                                fit: BoxFit.fill,
                               ),
                             ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text("Oui"),
-                            )
-                          ],
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor,
-                        ),
-                      );
-                    },
-                    label:
-                        Text(user == null ? "Se Connecter" : "Se Deconnecter"),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TitleTextWidget(label: userModel!.userName),
+                              const SizedBox(
+                                height: 6,
+                              ),
+                              SubtitleTextWidget(label: userModel!.userEmail)
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const TitleTextWidget(
+                      label: "General",
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Visibility(
+                      visible: userModel == null ? false : true,
+                      child: CustomListTile(
+                        text: "All Order",
+                        imagePath: AssetsManager.orderSvg,
+                        function: () {
+                          Navigator.pushNamed(
+                            context,
+                            OrdersScreenFree.routeName,
+                          );
+                        },
+                      ),
+                    ),
+                    Visibility(
+                      visible: userModel == null ? false : true,
+                      child: CustomListTile(
+                        text: "Liste de souhaits",
+                        imagePath: AssetsManager.wishlistSvg,
+                        function: () {
+                          Navigator.pushNamed(context, WishlistScreen.routName);
+                        },
+                      ),
+                    ),
+                    CustomListTile(
+                      text: "Historique",
+                      imagePath: AssetsManager.recent,
+                      function: () {
+                        Navigator.pushNamed(
+                            context, ViewedRecentlyScreen.routName);
+                      },
+                    ),
+                    CustomListTile(
+                      text: "Adresse",
+                      imagePath: AssetsManager.address,
+                      function: () {},
+                    ),
+                    const SizedBox(height: 6),
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    const SizedBox(height: 6),
+                    const TitleTextWidget(
+                      label: "Paramètre",
+                    ),
+                    const SizedBox(height: 10),
+                    SwitchListTile(
+                      secondary: Image.asset(
+                        AssetsManager.theme,
+                        height: 34,
+                      ),
+                      title: Text(themeProvider.getIsDarkTheme
+                          ? "Mode Sombre"
+                          : "Light Mode"),
+                      value: themeProvider.getIsDarkTheme,
+                      onChanged: (value) {
+                        themeProvider.setDarkTheme(themeValue: value);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Center(
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        30.0,
+                      ),
+                    ),
                   ),
-                )
-              ],
-            ),
-          )
-        ],
+                  icon: Icon(user == null ? Icons.login : Icons.logout),
+                  label:
+                      Text(user == null ? "Se Connececter" : "Se Déconnecter"),
+                  onPressed: () async {
+                    if (user == null) {
+                      Navigator.pushNamed(context, LoginScreen.routeName);
+                    } else {
+                      await MyAppFunctions.showErrorOrWarningDialog(
+                        context: context,
+                        subtitle: "Êtes-vous sûr de vouloir vous déconnecter ?",
+                        fct: () async {
+                          await FirebaseAuth.instance.signOut();
+                          if (!mounted) return;
+                          Navigator.pushReplacementNamed(
+                              context, LoginScreen.routeName);
+                        },
+                        isError: false,
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
