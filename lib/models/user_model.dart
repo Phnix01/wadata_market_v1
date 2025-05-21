@@ -6,12 +6,14 @@ class UserModel {
   final String userImage;
   final String userEmail;
   final Timestamp createdAt;
-  final List userCart, UserWish;
-  const UserModel(this.createdAt,
-      {required this.userId,
-      required this.userName,
-      required this.userImage,
-      required this.userEmail,
-      required this.userCart,
-      required this.UserWish});
+  final List userCart, userWish;
+  const UserModel({
+    required this.userId,
+    required this.userName,
+    required this.userImage,
+    required this.userEmail,
+    required this.userCart,
+    required this.userWish,
+    required this.createdAt,
+  });
 }
