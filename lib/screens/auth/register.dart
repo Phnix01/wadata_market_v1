@@ -64,36 +64,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _registerFCT() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
+
     if (isValid) {
       try {
         setState(() {
           _isLoading = true;
         });
-        await auth.createUserWithEmailAndPassword(
-            email: _emailController.text.trim(),
-            password: _passwordController.text.trim());
 
+        await auth.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
         final User? user = auth.currentUser;
         final String uid = user!.uid;
         await FirebaseFirestore.instance.collection("users").doc(uid).set({
           'userId': uid,
-          'userNamer': _nameController,
+          'userName': _nameController.text,
           'userImage': "",
           'userEmail': _emailController.text.toLowerCase(),
           'createdAt': Timestamp.now(),
           'userWish': [],
-          'userCart': []
+          'userCart': [],
         });
         Fluttertoast.showToast(
-            msg: "Un compte a été crée", textColor: Colors.white);
+          msg: "An account has been created",
+          textColor: Colors.white,
+        );
         if (!mounted) return;
         Navigator.pushReplacementNamed(context, RootScreen.routeName);
       } on FirebaseException catch (error) {
         await MyAppFunctions.showErrorOrWarningDialog(
-            context: context, subtitle: error.message.toString(), fct: () {});
+          context: context,
+          subtitle: error.message.toString(),
+          fct: () {},
+        );
       } catch (error) {
         await MyAppFunctions.showErrorOrWarningDialog(
-            context: context, subtitle: error.toString(), fct: () {});
+          context: context,
+          subtitle: error.toString(),
+          fct: () {},
+        );
       } finally {
         setState(() {
           _isLoading = false;
