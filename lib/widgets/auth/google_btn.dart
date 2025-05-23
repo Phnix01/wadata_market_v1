@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +23,26 @@ class GoogleBtn extends StatelessWidget {
           if (googleAuth.accessToken != null && googleAuth.idToken != null) {
             final authResults = await FirebaseAuth.instance
                 .signInWithCredential(GoogleAuthProvider.credential(
-                    accessToken: googleAuth.accessToken,
-                    idToken: googleAuth.idToken));
+              accessToken: googleAuth.accessToken,
+              idToken: googleAuth.idToken,
+            ));
+            if (authResults.additionalUserInfo!.isNewUser) {
+              await FirebaseFirestore.instance
+                  .collection("users")
+                  .doc(
+                    authResults.user!.uid,
+                  )
+                  .set({
+                'userId': authResults.user!.uid,
+                'userName': authResults.user!.displayName,
+                'userImage': authResults.user!.photoURL,
+                'userEmail': authResults.user!.email,
+                'createdAt': Timestamp.now(),
+                'userWish': [],
+                'userCart': [],
+              });
+            }
           }
-          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            Navigator.pushReplacementNamed(context, RootScreen.routeName);
-          });
         }
       } on FirebaseException catch (error) {
         await MyAppFunctions.showErrorOrWarningDialog(

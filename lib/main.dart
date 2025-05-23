@@ -6,6 +6,8 @@ import 'package:smart_shop_v1/consts/styles.dart';
 import 'package:smart_shop_v1/providers/cart_provider.dart';
 import 'package:smart_shop_v1/providers/products_provider.dart';
 import 'package:smart_shop_v1/providers/theme_provider.dart';
+import 'package:smart_shop_v1/providers/user_provider.dart';
+import 'package:smart_shop_v1/providers/viewed_recently_provider.dart';
 import 'package:smart_shop_v1/providers/whishlist_provider.dart';
 import 'package:smart_shop_v1/root_screen.dart';
 import 'package:smart_shop_v1/screens/auth/login_screen.dart';
@@ -66,6 +68,12 @@ class MyApp extends StatelessWidget {
               ),
               ChangeNotifierProvider(create: (_) {
                 return CartProvider();
+              }),
+              ChangeNotifierProvider(create: (_) {
+                return ViewedProdProvider();
+              }),
+              ChangeNotifierProvider(create: (_) {
+                return UserProvider();
               }),
               ChangeNotifierProvider(create: (_) {
                 return WishlistProvider();

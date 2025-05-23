@@ -20,37 +20,37 @@ class AppConstants {
     CategoriesModel(
       id: "Laptops",
       image: AssetsManager.pc,
-      name: "Laptops",
+      name: "Ordinateurs",
     ),
     CategoriesModel(
       id: "Electronics",
       image: AssetsManager.electronics,
-      name: "Electronics",
+      name: "Electroniques",
     ),
     CategoriesModel(
       id: "Watches",
       image: AssetsManager.watch,
-      name: "Watches",
+      name: "Montres",
     ),
     CategoriesModel(
       id: "Clothes",
       image: AssetsManager.fashion,
-      name: "Clothes",
+      name: "Vêtements",
     ),
     CategoriesModel(
       id: "Shoes",
       image: AssetsManager.shoes,
-      name: "Shoes",
+      name: "Chaussures",
     ),
     CategoriesModel(
       id: "Books",
       image: AssetsManager.book,
-      name: "Books",
+      name: "Livres",
     ),
     CategoriesModel(
       id: "Cosmetics",
       image: AssetsManager.cosmetics,
-      name: "Cosmetics",
+      name: "Cosmetiques",
     ),
   ];
 }

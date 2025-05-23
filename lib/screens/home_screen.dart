@@ -10,30 +10,22 @@ import 'package:smart_shop_v1/widgets/products/category_rounded_widget.dart';
 import 'package:smart_shop_v1/widgets/products/lastest_arrival.dart';
 import 'package:smart_shop_v1/widgets/title_text_widget.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  List<String> bannerImage = [AssetsManager.banner1, AssetsManager.banner2];
-  @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final productsProvider = Provider.of<ProductsProvider>(context);
     Size size = MediaQuery.of(context).size;
+    final productsProvider = Provider.of<ProductsProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(
             AssetsManager.shoppingCart,
           ),
         ),
-        title: AppNameTextWidget(),
+        title: const AppNameTextWidget(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -42,35 +34,35 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               SizedBox(
                 height: size.height * 0.25,
-                child: Swiper(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Image.asset(
-                      bannerImage[index],
-                      fit: BoxFit.fill,
-                    );
-                  },
-                  itemCount: bannerImage.length,
-                  pagination: SwiperPagination(
-                    builder: DotSwiperPaginationBuilder(
-                      activeColor: Colors.red,
-                      color: Colors.white,
+                child: ClipRRect(
+                  // borderRadius: BorderRadius.circular(50),
+                  child: Swiper(
+                    autoplay: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Image.asset(
+                        AppConstants.bannersImages[index],
+                        fit: BoxFit.fill,
+                      );
+                    },
+                    itemCount: AppConstants.bannersImages.length,
+                    pagination: const SwiperPagination(
+                      // alignment: Alignment.center,
+                      builder: DotSwiperPaginationBuilder(
+                          activeColor: Colors.red, color: Colors.white),
                     ),
                   ),
-                  // control: SwiperControl(),
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 15.0,
               ),
-              TitleTextWidget(
-                label: "Nouveau Arrivage",
-              ),
+              const TitleTextWidget(label: "Nouveau Arrivage"),
               const SizedBox(
-                height: 20,
+                height: 15.0,
               ),
               SizedBox(
                 height: size.height * 0.2,
@@ -83,23 +75,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: const LatestArrivalProductsWidget());
                     }),
               ),
-              const TitleTextWidget(label: "Categories"),
+              const TitleTextWidget(label: "Catégories"),
               const SizedBox(
                 height: 15.0,
               ),
               GridView.count(
-                crossAxisCount: 4,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                children: List.generate(
-                  AppConstants.categoriesList.length,
-                  (index) {
-                    return CategoryRoundedWidget(
-                        image: AppConstants.categoriesList[index].image,
-                        name: AppConstants.categoriesList[index].name);
-                  },
-                ),
-              )
+                crossAxisCount: 4,
+                children:
+                    List.generate(AppConstants.categoriesList.length, (index) {
+                  return CategoryRoundedWidget(
+                    image: AppConstants.categoriesList[index].image,
+                    name: AppConstants.categoriesList[index].name,
+                  );
+                }),
+              ),
             ],
           ),
         ),
