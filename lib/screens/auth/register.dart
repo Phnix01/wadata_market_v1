@@ -291,6 +291,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         controller: _repeatePasswordController,
                         focusNode: _repeatPasswordFocus,
                         textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.visiblePassword,
                         obscureText: _isObscur ? true : false,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -317,8 +318,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 : Icon(Icons.visibility_off),
                           ),
                         ),
-                        onFieldSubmitted: (value) {
-                          FocusScope.of(context).unfocus();
+                        onFieldSubmitted: (value) async {
+                          await _registerFCT();
                         },
                         validator: (value) {
                           return MyValidators.repeatPasswordValidator();
