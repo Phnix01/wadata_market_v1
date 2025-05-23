@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
           password: _passwordController.text.trim(),
         );
         Fluttertoast.showToast(
-          msg: "Login Succeful",
+          msg: "Connexion réuissi",
           textColor: Colors.white,
         );
         if (!mounted) return;
@@ -159,6 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: _passwordController,
                         focusNode: _passwordFocusNode,
                         textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.visiblePassword,
                         obscureText: _isObscur ? true : false,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -185,6 +186,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 : Icon(Icons.visibility_off),
                           ),
                         ),
+                        onFieldSubmitted: (value) async {
+                          await _loginFct();
+                        },
                         validator: (value) {
                           return MyValidators.passwordValidator(value);
                         },
@@ -207,7 +211,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton.icon(
-                          onPressed: _loginFct,
+                          onPressed: () async {
+                            await _loginFct();
+                          },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blueAccent,
                               foregroundColor: Colors.white,
