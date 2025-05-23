@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smart_shop_v1/consts/validator.dart';
+import 'package:smart_shop_v1/root_screen.dart';
 import 'package:smart_shop_v1/screens/auth/register.dart';
 import 'package:smart_shop_v1/screens/loading_manager.dart';
+import 'package:smart_shop_v1/services/my_app_functions.dart';
 import 'package:smart_shop_v1/widgets/app_text_widget.dart';
 import 'package:smart_shop_v1/widgets/auth/google_btn.dart';
 import 'package:smart_shop_v1/widgets/subtitle_text.dart';
@@ -52,6 +55,41 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _loginFct() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      try {
+        setState(() {
+          _isLoading = true;
+        });
+
+        await auth.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        Fluttertoast.showToast(
+          msg: "Login Succeful",
+          textColor: Colors.white,
+        );
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, RootScreen.routeName);
+      } on FirebaseException catch (error) {
+        await MyAppFunctions.showErrorOrWarningDialog(
+          context: context,
+          subtitle: error.message.toString(),
+          fct: () {},
+        );
+      } catch (error) {
+        await MyAppFunctions.showErrorOrWarningDialog(
+          context: context,
+          subtitle: error.toString(),
+          fct: () {},
+        );
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   @override
