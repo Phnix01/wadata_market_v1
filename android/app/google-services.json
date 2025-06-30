@@ -29,6 +29,13 @@
             {
               "client_id": "662395477749-kf5tpr3d7jsfa1n2rbshu6dhbjq9vr5d.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "662395477749-l21o0589vdafkhh3qnktmo41r3pd9stq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartShopV1"
+              }
             }
           ]
         }

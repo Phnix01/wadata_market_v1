@@ -66,4 +66,5 @@ class DefaultFirebaseOptions {
     iosClientId: '662395477749-l21o0589vdafkhh3qnktmo41r3pd9stq.apps.googleusercontent.com',
     iosBundleId: 'com.example.smartShopV1',
   );
+
 }

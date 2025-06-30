@@ -79,15 +79,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
         final String uid = user!.uid;
         await FirebaseFirestore.instance.collection("users").doc(uid).set({
           'userId': uid,
-          'userName': _nameController.text,
+          'userName': _nameController.text.trim(),
           'userImage': "",
-          'userEmail': _emailController.text.toLowerCase(),
+          'userEmail': _emailController.text.trim().toLowerCase(),
           'createdAt': Timestamp.now(),
           'userWish': [],
           'userCart': [],
         });
         Fluttertoast.showToast(
-          msg: "An account has been created",
+          msg: "Compte crée avec Succès",
           textColor: Colors.white,
         );
         if (!mounted) return;
