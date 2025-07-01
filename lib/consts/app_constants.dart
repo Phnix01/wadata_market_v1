@@ -18,7 +18,7 @@ class AppConstants {
       name: "Phones",
     ),
     CategoriesModel(
-      id: "Laptops",
+      id: "Ordinateurs",
       image: AssetsManager.pc,
       name: "Ordinateurs",
     ),
@@ -28,17 +28,17 @@ class AppConstants {
       name: "Electroniques",
     ),
     CategoriesModel(
-      id: "Watches",
+      id: "Montres",
       image: AssetsManager.watch,
       name: "Montres",
     ),
     CategoriesModel(
-      id: "Clothes",
+      id: "Vêtements",
       image: AssetsManager.fashion,
       name: "Vêtements",
     ),
     CategoriesModel(
-      id: "Shoes",
+      id: "Chaussures",
       image: AssetsManager.shoes,
       name: "Chaussures",
     ),
