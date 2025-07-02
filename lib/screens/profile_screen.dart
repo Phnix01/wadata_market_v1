@@ -161,7 +161,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                     ),
                     Visibility(
-                      visible: userModel == null ? false : true,
+                      visible: userModel == null ? true : false,
                       child: CustomListTile(
                         text: "Liste de souhaits",
                         imagePath: AssetsManager.wishlistSvg,

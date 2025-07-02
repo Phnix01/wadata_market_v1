@@ -183,6 +183,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 16,
                 ),
                 Form(
+                  key: _formKey,
                   child: Column(
                     children: [
                       TextFormField(
@@ -332,9 +333,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton.icon(
-                          onPressed: () async {
-                            await _registerFCT();
-                          },
+                          onPressed: _registerFCT,
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blueAccent,
                               foregroundColor: Colors.white,
