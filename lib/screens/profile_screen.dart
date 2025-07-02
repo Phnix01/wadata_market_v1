@@ -150,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     Visibility(
                       visible: userModel == null ? false : true,
                       child: CustomListTile(
-                        text: "All Order",
+                        text: "Vos commandes",
                         imagePath: AssetsManager.orderSvg,
                         function: () {
                           Navigator.pushNamed(
@@ -161,7 +161,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                     ),
                     Visibility(
-                      visible: userModel == null ? true : false,
+                      visible: userModel == null ? false : true,
                       child: CustomListTile(
                         text: "Liste de souhaits",
                         imagePath: AssetsManager.wishlistSvg,
@@ -218,9 +218,15 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                     ),
                   ),
-                  icon: Icon(user == null ? Icons.login : Icons.logout),
-                  label:
-                      Text(user == null ? "Se Connececter" : "Se Déconnecter"),
+                  icon: Icon(
+                    user == null ? Icons.login : Icons.logout,
+                    color: Colors.white,
+                  ),
+                  label: Text(
+                    user == null ? "Se Connececter" : "Se Déconnecter",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
                   onPressed: () async {
                     if (user == null) {
                       Navigator.pushNamed(context, LoginScreen.routeName);
