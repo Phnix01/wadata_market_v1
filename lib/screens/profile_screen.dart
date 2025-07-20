@@ -4,6 +4,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_shop_v1/models/user_model.dart';
 import 'package:smart_shop_v1/providers/user_provider.dart';
+import 'package:smart_shop_v1/root_screen.dart';
 import 'package:smart_shop_v1/screens/auth/login_screen.dart';
 import 'package:smart_shop_v1/screens/inner_screen.dart/orders/orders_screen.dart';
 import 'package:smart_shop_v1/screens/inner_screen.dart/viewed_recently.dart';
@@ -238,7 +239,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           await FirebaseAuth.instance.signOut();
                           if (!mounted) return;
                           Navigator.pushReplacementNamed(
-                              context, LoginScreen.routeName);
+                              context, RootScreen.routeName);
                         },
                         isError: false,
                       );
